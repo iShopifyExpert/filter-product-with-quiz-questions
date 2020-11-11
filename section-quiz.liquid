@@ -1,0 +1,242 @@
+{{- 'custom.css' | asset_url | stylesheet_tag -}}
+<section class="mini__quiz bg-lp rel">
+  <div class="container--l mha px2 phm4 rel">
+    <div class="abs mini__quiz-sticker">
+      <img class="lazyload is-visible is-loaded" alt="{{ section.settings.titleimage.alt| escape }}" src="{{ section.settings.titleimage.src | img_url: '175x175' }}">      
+    </div>
+    <div class="wrapper__inner rel ac">
+      <h2 class="serif mini__quiz-header">{{ section.settings.title | escape }}</h2>
+    </div>
+    <div class="mini__quiz">
+      <div class="rel f jcb ais fw mini__quiz-answers">
+        <svg class="mini__quiz-star abs left z1 top p1" width="57" height="58" viewBox="0 0 57 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.5629 55.9722C19.5993 56.351 19.8477 56.6764 20.2035 56.8118C20.5594 56.9472 20.9611 56.869 21.2399 56.6102L34.5397 44.2592L52.276 48.1896C52.6477 48.272 53.0338 48.1364 53.272 47.8398C53.5101 47.5433 53.5591 47.1371 53.3983 46.7921L45.7373 30.3562L54.9632 14.7407C55.1568 14.413 55.1473 14.0036 54.9386 13.6849C54.7299 13.3662 54.3582 13.1934 53.9801 13.2394L35.9454 15.431L23.9125 1.84949C23.6601 1.56466 23.268 1.44743 22.9009 1.54703C22.5338 1.64663 22.2553 1.94581 22.1822 2.31894L18.6981 20.1104L2.03434 27.3331C1.68495 27.4845 1.45215 27.8213 1.43392 28.2016C1.41569 28.5819 1.6152 28.9397 1.94847 29.1245L17.8285 37.9283L19.5629 55.9722Z" fill="#FFCDCA" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>          
+        <label for="skin" class="f jcs aic rel js-mini-select mini__quiz-block x px1">
+          <div class="abs right top px05 mini__quiz-input">
+            <input type="checkbox" name="{{ section.settings.answer1 | escape }}" value="{{ section.settings.answer1 | handle }}" id="{{ section.settings.answer1 | handle }}">
+            <span class="mini__quiz-select">
+              <svg class="abs mini__quiz-check" width="31" height="27" viewBox="0 0 31 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 15.9292L8 24.9292L29 2.4292" stroke="#FFCDAC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </div>
+          <div class="mr1 mini__quiz-icon">
+            <img class="lazyload is-visible is-loaded" alt="{{ section.settings.answer1 }}" src="{{ section.settings.question1icon.src | img_url: '100x100' }}">
+          </div>
+          <div>
+            <h4>{{ section.settings.question1 | escape }}</h4>
+          </div>
+        </label>
+        <label for="period" class="f jcs aic rel js-mini-select mini__quiz-block x px1">
+          <div class="abs right top px05 mini__quiz-input">
+            <input type="checkbox" name="{{ section.settings.answer2 | escape }}" value="{{ section.settings.answer2 | handle }}" id="{{ section.settings.answer2 | handle }}">
+            <span class="mini__quiz-select">
+              <svg class="abs mini__quiz-check" width="31" height="27" viewBox="0 0 31 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 15.9292L8 24.9292L29 2.4292" stroke="#FFCDAC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </div>
+          <div class="mr1 mini__quiz-icon">
+            <img class="lazyload is-visible is-loaded" alt="{{ section.settings.answer2 }}" src="{{ section.settings.question2icon.src | img_url: '100x100' }}">
+          </div>
+          <div>
+            <h4>{{ section.settings.question2 | escape }}</h4>
+          </div>
+        </label>
+        <label for="nautral" class="f jcs aic rel js-mini-select mini__quiz-block x px1">
+          <div class="abs right top px05 mini__quiz-input">
+            <input type="checkbox" name="{{ section.settings.answer3 | escape }}" value="{{ section.settings.answer3 | handle }}" id="{{ section.settings.answer3 | handle }}">
+            <span class="mini__quiz-select">
+              <svg class="abs mini__quiz-check" width="31" height="27" viewBox="0 0 31 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 15.9292L8 24.9292L29 2.4292" stroke="#FFCDAC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </div>
+          <div class="mr1 mini__quiz-icon">
+            <img class="lazyload is-visible is-loaded" alt="{{ section.settings.answer3 }}" src="{{ section.settings.question3icon.src | img_url: '100x100' }}">
+          </div>
+          <div>
+            <h4>{{ section.settings.question3 | escape }}</h4>
+          </div>
+        </label>
+      </div>
+      {% for block in section.blocks %}
+      {% capture pselection %}{% if block.settings.selection1 %}{{ section.settings.answer1 | handle }}{% endif %}{% if block.settings.selection2 %} {{ section.settings.answer2 | handle }}{% endif %}{% if block.settings.selection3 %} {{ section.settings.answer3 | handle }}{% endif %}{% endcapture %}
+      <div class="mini__quiz-results js-mini-results bg-w f fw -{{pselection | strip | replace: ' ', '-'}}" style="display:none;">
+        <div class="mini__quiz-image x">
+          <img class="block js-mini-result-image x y" src="{{ block.settings.image.src | img_url: '1600x1600' }}">
+        </div>
+        <div class="ac x px1 f jcb mini__quiz-purchase aic">
+          <div class="x y f jcc aic">
+            <div class="mini__quiz-desc">
+              <h5 class="caps bold s1 mx0 px0 mt1">We Recommend</h5>
+              <h4 class="serif js-mini-title mx0 pt05 mb1">{{ block.settings.name }}</h4>
+              <div class="js-mini-desc">
+                <p class="p2">{{ block.settings.description }}</p>
+              </div>
+              <span class="block s16 mb1 js-price">{{ block.settings.price }}</span>
+              {% assign qproduct = all_products[block.settings.product] %}
+              {% form 'product', qproduct, class: 'quiz-product', data-product-form: '' %}
+              <input type="hidden" name="id" id="selectedVariant-{{ qproduct.id }}" value="{{qproduct.selected_or_first_available_variant.id}}">
+              <button type="submit" name="add" class="js-submit-quiz btn ml05 btn__blue pink-back bold mt0" data-add-to-cart="">
+                <span>Add to Cart</span>
+              </button>
+              {% endform %}
+              <p class="js-thanks mini__quiz-thanks">Got it, added to your cart!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>
+  jQuery($ => {
+    let $seasons = $('.mini__quiz-results');
+    let $checkboxes = $('.mini__quiz-input input[type="checkbox"]').on('change', function() {
+      $seasons.show();
+      let selector = $checkboxes.filter(':checked').map((i, el) => '-' + el.value).get().join('');
+      if (selector.length != 0) { console.log(selector); $('.mini__quiz-results:not(.'+selector+')').hide(); } else { $('.mini__quiz-results').hide(); }//$seasons.filter(`:not("${selector}")`).hide();
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Section Quiz",
+  "class": "quiz-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "What are you looking for today?"
+    },
+    {
+      "type": "image_picker",
+      "id": "titleimage",
+      "label": "Title Image"
+    },
+    {
+      "type": "header",
+      "content": "Quiz Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "question1",
+      "label": "Question 1",
+      "default": "I have acne prone skin"
+    },
+    {
+      "type": "text",
+      "id": "answer1",
+      "label": "Answer 1",
+      "default": "Skin"
+    },
+    {
+      "type": "image_picker",
+      "id": "question1icon",
+      "label": "Question 1 Icon"
+    },
+    {
+      "type": "textarea",
+      "id": "question2",
+      "label": "Question 2",
+      "default": "I'm looking for period products"
+    },
+    {
+      "type": "text",
+      "id": "answer2",
+      "label": "Answer 2",
+      "default": "Period"
+    },
+    {
+      "type": "image_picker",
+      "id": "question2icon",
+      "label": "Question 2 Icon"
+    },
+    {
+      "type": "textarea",
+      "id": "question3",
+      "label": "Question 3",
+      "default": "I want a natural deodorant that works"
+    },
+    {
+      "type": "text",
+      "id": "answer3",
+      "label": "Answer 3",
+      "default": "Nautral"
+    },
+    {
+      "type": "image_picker",
+      "id": "question3icon",
+      "label": "Question 3 Icon"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 7,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "selection1",
+          "label": "Selection 1",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "selection2",
+          "label": "Selection 2",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "selection3",
+          "label": "Selection 3",
+          "default": false
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Product Title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Short description about your services and products.</p>"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$100"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1600 x 1600px recommended"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Quiz",
+      "category": "Store information"
+    }
+  ]
+}
+
+{% endschema %}
