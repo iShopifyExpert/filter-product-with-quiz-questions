@@ -81,8 +81,15 @@
               </div>
               <span class="block s16 mb1 js-price">{{ block.settings.price }}</span>
               {% assign qproduct = all_products[block.settings.product] %}
+              {% assign qproduct2 = all_products[block.settings.product2] %}
+              {% assign qproduct3 = all_products[block.settings.product3] %}
               {% form 'product', qproduct, class: 'quiz-product', data-product-form: '' %}
-              <input type="hidden" name="id" id="selectedVariant-{{ qproduct.id }}" value="{{qproduct.selected_or_first_available_variant.id}}">
+              {% if qproduct != blank %}
+              <input type="hidden" name="id[]" id="selectedVariant-{{ qproduct.id }}" value="{{qproduct.selected_or_first_available_variant.id}}">{% endif %}
+              {% if qproduct2 != blank %}
+              <input type="hidden" name="id[]" id="selectedVariant-{{ qproduct2.id }}" value="{{qproduct2.selected_or_first_available_variant.id}}">{% endif %}
+              {% if qproduct3 != blank %}
+              <input type="hidden" name="id[]" id="selectedVariant-{{ qproduct3.id }}" value="{{qproduct3.selected_or_first_available_variant.id}}">{% endif %}
               <button type="submit" name="add" class="js-submit-quiz btn ml05 btn__blue pink-back bold mt0" data-add-to-cart="">
                 <span>Add to Cart</span>
               </button>
@@ -224,6 +231,16 @@
           "type": "product",
           "id": "product",
           "label": "Select Product"
+        },
+        {
+          "type": "product",
+          "id": "product2",
+          "label": "Select Product 2"
+        },
+        {
+          "type": "product",
+          "id": "product3",
+          "label": "Select Product 3"
         },
         {
           "type": "text",
