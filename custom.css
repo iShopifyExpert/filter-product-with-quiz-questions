@@ -458,7 +458,7 @@ select {
   height: 54px;
 }
 input[type='checkbox'] {
-  height: auto;
+    height: auto;
 }
 input[type='radio'] {
   height: 0;
@@ -627,6 +627,7 @@ ul.list {
 }
   }
 @media (min-width: 56.26em) {
+  
 .pm40 {
     padding-top: 40px;
     padding-bottom: 40px
@@ -732,7 +733,7 @@ body {
  * @font-face definitions in /assets/fonts.css
  * and linked in <head> of theme.liquid
  */
-body, .text {
+ .text {
   font-family: 'apercu-web';
   font-weight: 400;
 }
@@ -1029,13 +1030,13 @@ p .p5 {
     font-size: calc((22/16) * 1rem)
 }
   }
-p, .p,
+
 ul, li{
   line-height: 1.5;
 }
-p {
+/* p {
   margin: 1em 0;
-}
+} */
 blockquote {
   text-align: center;
   color: #1F4068;
@@ -2108,7 +2109,7 @@ em, .i {
   }
 @media (min-width: 56.26em) {
 .mini__quiz-answers {
-      margin-top: 40px
+      margin-top: 12px
   }
     }
 .mini__quiz-purchase {
@@ -2127,7 +2128,7 @@ em, .i {
 .mini__quiz-header {
     margin: 20px auto;
     padding-bottom: 1rem;
-    max-width: 500px;
+    max-width: 680px;
   }
 .mini__quiz-block {
     border: 2px solid #1F4068;
@@ -2143,9 +2144,14 @@ em, .i {
 .mini__quiz-block h4 {
       max-width: 260px;
     }
+@media (min-width: 56.27em) {
+  .mini__quiz-block {
+      width: calc(32% - 23px);
+  }
+}
 @media (min-width: 56.26em) {
 .mini__quiz-block h4 {
-        margin: 0.5rem 0;
+       margin: 0.2rem 0px 20px 0;
         /* max-width: 80%; */
         font-size: 30px
     }
@@ -2156,7 +2162,7 @@ em, .i {
     }
 @media (min-width: 56.26em) {
 .mini__quiz-block {
-      width: calc(33% - 15px);
+      width: calc(32% - 0px);
       padding: 1.5rem;
       border: 1px solid rgba(0, 30, 66, 0.2) !important;
       flex-wrap: wrap;
@@ -2200,6 +2206,9 @@ em, .i {
   }
 .mini__quiz-input input {
       opacity: 0;
+      width: 28px;
+      height: 28px;
+      z-index: 9999;
       position: absolute;
     }
 @media (min-width: 56.26em) {
@@ -2241,6 +2250,9 @@ em, .i {
       position: static;
       opacity: 1;
     }
+.wide {
+    margin: 0 65px;
+}    
 @media (min-width: 56.26em) {
 .mini__quiz-results > div {
         width: 50%
@@ -2252,4 +2264,51 @@ em, .i {
       border: 6px solid #FFCDAC;
       border: 6px solid var(--orange)
   }
+}
+    @media (max-width:600px){
+      .wide {
+        margin: 0 5px;
+      }
+      .pr2, .ph2, .px2 {
+        padding-right: 1.2em;
+      }
+      .pl2, .ph2, .px2 {
+        padding-left: 1.2em;
+      }
+      h4, .h4 {
+        line-height: 1;
+      }
+      .mini__quiz-block h4 {
+        margin-top: 11px;
+      }
+      .mr1, .mh1, .mx1 {
+        margin-right: 0.3em;
+      }
+      .mini__quiz-block {
+        margin-bottom: 0;
+      }
+    }
+@media (max-width: 320px){
+.pl2, .ph2, .px2 {
+    padding-left: 0.2em;
+}    
+ .pr2, .ph2, .px2 {
+    padding-right: 0.2em;
+} 
+  .mini__quiz-block h4{
+  font-size: 18px;
+  }
+  
+}
+    svg.mini__quiz-star.abs.left.z1.top.p1 {
+    display: none;
+}
+    div#shopify-section-1605354159621e18e5 {
+    background-color: #e9d0c6 !important;
+}
+#shopify-section-16053539425abae0b5 h2.rich-text__heading.title {
+    margin-bottom: 0 !important;
+}
+.mini__quiz-block .question {
+    padding: 30px 0 20px;
 }
