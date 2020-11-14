@@ -1,18 +1,22 @@
 {{- 'custom.css' | asset_url | stylesheet_tag -}}
-<section class="mini__quiz bg-lp rel">
+<section class="{% if section.settings.wide %}wide {% endif %}mini__quiz bg-lp rel">
   <div class="container--l mha px2 phm4 rel">
+    {% if section.settings.titleimage != blank %}
     <div class="abs mini__quiz-sticker">
       <img class="lazyload is-visible is-loaded" alt="{{ section.settings.titleimage.alt| escape }}" src="{{ section.settings.titleimage.src | img_url: '175x175' }}">      
     </div>
+    {% endif %}
+    {% if section.settings.title != blank %}
     <div class="wrapper__inner rel ac">
-      <h2 class="serif mini__quiz-header">{{ section.settings.title | escape }}</h2>
+      <h2 class="mini__quiz-header">{{ section.settings.title | escape }}</h2>
     </div>
+    {% endif %}
     <div class="mini__quiz">
       <div class="rel f jcb ais fw mini__quiz-answers">
         <svg class="mini__quiz-star abs left z1 top p1" width="57" height="58" viewBox="0 0 57 58" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M19.5629 55.9722C19.5993 56.351 19.8477 56.6764 20.2035 56.8118C20.5594 56.9472 20.9611 56.869 21.2399 56.6102L34.5397 44.2592L52.276 48.1896C52.6477 48.272 53.0338 48.1364 53.272 47.8398C53.5101 47.5433 53.5591 47.1371 53.3983 46.7921L45.7373 30.3562L54.9632 14.7407C55.1568 14.413 55.1473 14.0036 54.9386 13.6849C54.7299 13.3662 54.3582 13.1934 53.9801 13.2394L35.9454 15.431L23.9125 1.84949C23.6601 1.56466 23.268 1.44743 22.9009 1.54703C22.5338 1.64663 22.2553 1.94581 22.1822 2.31894L18.6981 20.1104L2.03434 27.3331C1.68495 27.4845 1.45215 27.8213 1.43392 28.2016C1.41569 28.5819 1.6152 28.9397 1.94847 29.1245L17.8285 37.9283L19.5629 55.9722Z" fill="#FFCDCA" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>          
-        <label for="skin" class="f jcs aic rel js-mini-select mini__quiz-block x px1">
+        <label for="{{ section.settings.answer1 | handle }}" class="f jcs aic rel js-mini-select mini__quiz-block x px1">
           <div class="abs right top px05 mini__quiz-input">
             <input type="checkbox" name="{{ section.settings.answer1 | escape }}" value="{{ section.settings.answer1 | handle }}" id="{{ section.settings.answer1 | handle }}">
             <span class="mini__quiz-select">
@@ -24,11 +28,11 @@
           <div class="mr1 mini__quiz-icon">
             <img class="lazyload is-visible is-loaded" alt="{{ section.settings.answer1 }}" src="{{ section.settings.question1icon.src | img_url: '100x100' }}">
           </div>
-          <div>
+          <div class="question">
             <h4>{{ section.settings.question1 | escape }}</h4>
           </div>
         </label>
-        <label for="period" class="f jcs aic rel js-mini-select mini__quiz-block x px1">
+        <label for="{{ section.settings.answer2 | handle }}" class="f jcs aic rel js-mini-select mini__quiz-block x px1">
           <div class="abs right top px05 mini__quiz-input">
             <input type="checkbox" name="{{ section.settings.answer2 | escape }}" value="{{ section.settings.answer2 | handle }}" id="{{ section.settings.answer2 | handle }}">
             <span class="mini__quiz-select">
@@ -40,11 +44,11 @@
           <div class="mr1 mini__quiz-icon">
             <img class="lazyload is-visible is-loaded" alt="{{ section.settings.answer2 }}" src="{{ section.settings.question2icon.src | img_url: '100x100' }}">
           </div>
-          <div>
+          <div class="question">
             <h4>{{ section.settings.question2 | escape }}</h4>
           </div>
         </label>
-        <label for="nautral" class="f jcs aic rel js-mini-select mini__quiz-block x px1">
+        <label for="{{ section.settings.answer3 | handle }}" class="f jcs aic rel js-mini-select mini__quiz-block x px1">
           <div class="abs right top px05 mini__quiz-input">
             <input type="checkbox" name="{{ section.settings.answer3 | escape }}" value="{{ section.settings.answer3 | handle }}" id="{{ section.settings.answer3 | handle }}">
             <span class="mini__quiz-select">
@@ -56,7 +60,7 @@
           <div class="mr1 mini__quiz-icon">
             <img class="lazyload is-visible is-loaded" alt="{{ section.settings.answer3 }}" src="{{ section.settings.question3icon.src | img_url: '100x100' }}">
           </div>
-          <div>
+          <div class="question">
             <h4>{{ section.settings.question3 | escape }}</h4>
           </div>
         </label>
@@ -92,6 +96,11 @@
     </div>
   </div>
 </section>
+<style>
+  .bg-lp{
+    background-color: {{section.settings.color}} !important;
+  }
+</style>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>
   jQuery($ => {
@@ -107,7 +116,20 @@
 {
   "name": "Section Quiz",
   "class": "quiz-section",
+  "max_blocks": 15,
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "wide",
+      "label": "Non-Wide Display",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Background Color",
+      "default": "#e9d0c6"
+    },
     {
       "type": "text",
       "id": "title",
@@ -179,7 +201,6 @@
     {
       "type": "product",
       "name": "Product",
-      "limit": 7,
       "settings": [
         {
           "type": "checkbox",
@@ -238,5 +259,4 @@
     }
   ]
 }
-
 {% endschema %}
